@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TDKBU Visualizer</title>
+
+<style>
+
+body{
+    margin:0;
+    overflow:hidden;
+    background:#000;
+    font-family:Arial, sans-serif;
+}
+
+canvas{
+    position:absolute;
+    inset:0;
+}
+
+.word{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    color:#c77dff;
+    font-size:42px;
+    font-weight:900;
+    letter-spacing:4px;
+
+    text-shadow:
+        0 0 10px #9d4edd,
+        0 0 20px #9d4edd,
+        0 0 40px #c77dff;
+
+    transition:.2s ease;
+}
+
+.active{
+    color:white;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1.25);
+
+    text-shadow:
+        0 0 10px white,
+        0 0 20px white,
+        0 0 40px #c77dff,
+        0 0 80px #c77dff;
+}
+
+#damn{
+    left:20%;
+    top:50%;
+}
+
+#ooh{
+    left:50%;
+    top:20%;
+}
+
+#right{
+    left:80%;
+    top:50%;
+}
+
+#yeah{
+    left:50%;
+    top:80%;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="word" id="damn">DAMN</div>
+<div class="word" id="ooh">OOH</div>
+<div class="word" id="right">RIGHT</div>
+<div class="word" id="yeah">YEAH</div>
+
+<canvas id="canvas"></canvas>
+
+<script>
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+const sequence = [
+    "yeah",
+    "damn",
+    "ooh",
+    "damn",
+    "right",
+    "ooh",
+    "damn",
+    "right",
+    "yeah"
+];
+
+/*
+Timing between lyric hits
+(loops every 2.55 seconds)
+*/
+
+const lyricTimes = [
+    0.00,  // yeah
+    0.42,  // damn
+    0.84,  // ooh
+    1.28,  // damn
+    1.72,  // right
+    2.12,  // ooh
+    2.56,  // damn
+    3.00,  // right
+    3.44 
+];
+
+function center(el){
+    return{
+        x:el.offsetLeft,
+        y:el.offsetTop
+    };
+}
+
+const particles = [];
+const trail = [];
+
+function createParticles(x,y){
+
+    for(let i=0;i<3;i++){
+
+        particles.push({
+            x:x,
+            y:y,
+            vx:(Math.random()-0.5)*2,
+            vy:(Math.random()-0.5)*2,
+            life:25
+        });
+    }
+}
+
+function drawParticles(){
+
+    for(let i=particles.length-1;i>=0;i--){
+
+        const p = particles[i];
+
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life--;
+
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,2.5,0,Math.PI*2);
+
+        ctx.fillStyle =
+        `rgba(199,125,255,${p.life/25})`;
+
+        ctx.fill();
+
+        if(p.life<=0){
+            particles.splice(i,1);
+        }
+    }
+}
+
+const startTime = performance.now();
+
+function animate(now){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    const phraseDuration =
+        lyricTimes[lyricTimes.length-1];
+
+    const loopTime =
+        ((now - startTime)/1000)
+        % phraseDuration;
+
+    let segment = 0;
+
+    for(let i=0;i<lyricTimes.length-1;i++){
+
+        if(
+            loopTime >= lyricTimes[i] &&
+            loopTime < lyricTimes[i+1]
+        ){
+            segment = i;
+            break;
+        }
+    }
+
+    document
+        .querySelectorAll(".word")
+        .forEach(
+            word =>
+            word.classList.remove("active")
+        );
+
+    document
+        .getElementById(sequence[segment])
+        .classList.add("active");
+
+    const startWord =
+        document.getElementById(
+            sequence[segment]
+        );
+
+    const endWord =
+        document.getElementById(
+            sequence[segment+1]
+        );
+
+    const start = center(startWord);
+    const end = center(endWord);
+
+    const t1 = lyricTimes[segment];
+    const t2 = lyricTimes[segment+1];
+
+    let progress =
+        (loopTime - t1) /
+        (t2 - t1);
+
+    progress = Math.max(
+        0,
+        Math.min(1, progress)
+    );
+
+    const x =
+        start.x +
+        (end.x - start.x)
+        * progress;
+
+    const y =
+        start.y +
+        (end.y - start.y)
+        * progress;
+
+    trail.push({x,y});
+
+    if(trail.length > 60){
+        trail.shift();
+    }
+
+    for(let i=0;i<trail.length;i++){
+
+        const p = trail[i];
+
+        const alpha =
+            i/trail.length;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            4,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fillStyle =
+            `rgba(199,125,255,${alpha*0.5})`;
+
+        ctx.fill();
+    }
+
+    createParticles(x,y);
+    drawParticles();
+
+    /* Army Bomb Glow */
+
+    ctx.save();
+
+    ctx.shadowBlur = 70;
+    ctx.shadowColor = "#c77dff";
+
+    const pulse =
+        20 +
+        Math.sin(now/120)*4;
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        pulse,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fillStyle =
+        "rgba(199,125,255,0.22)";
+
+    ctx.fill();
+
+    ctx.restore();
+
+    /* Main Orb */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        12,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fillStyle = "#ffffff";
+
+    ctx.shadowBlur = 40;
+    ctx.shadowColor = "#c77dff";
+
+    ctx.fill();
+
+    requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
+
+</script>
+
+</body>
+</html>
