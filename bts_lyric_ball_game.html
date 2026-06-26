@@ -6,19 +6,16 @@
 <title>TDKBU Visualizer</title>
 
 <style>
-
 body{
     margin:0;
     overflow:hidden;
-    background:#000;
+    background:#000000f3;
     font-family:Arial, sans-serif;
 }
-
 canvas{
     position:absolute;
     inset:0;
 }
-
 .word{
     position:absolute;
     transform:translate(-50%,-50%);
@@ -26,54 +23,46 @@ canvas{
     font-size:42px;
     font-weight:900;
     letter-spacing:4px;
-
     text-shadow:
         0 0 10px #9d4edd,
         0 0 20px #9d4edd,
         0 0 40px #c77dff;
-
     transition:.2s ease;
 }
-
 .active{
     color:white;
-
     transform:
         translate(-50%,-50%)
         scale(1.25);
-
     text-shadow:
         0 0 10px white,
         0 0 20px white,
         0 0 40px #c77dff,
         0 0 80px #c77dff;
 }
-
 #damn{
     left:20%;
     top:50%;
 }
-
 #ooh{
     left:50%;
     top:20%;
 }
-
 #right{
     left:80%;
     top:50%;
 }
-
 #yeah{
     left:50%;
     top:80%;
 }
-
 </style>
 </head>
 
 <body>
-
+<h1 class="title">
+    BTS: They Don't Know 'Bout Us
+</h1>
 <div class="word" id="damn">DAMN</div>
 <div class="word" id="ooh">OOH</div>
 <div class="word" id="right">RIGHT</div>
