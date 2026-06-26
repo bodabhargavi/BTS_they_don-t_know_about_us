@@ -1,24 +1,18 @@
 /* ===========================================
    GOOGLE FONT
 =========================================== */
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
-
 html,
 body{
-
     width:100%;
     height:100%;
     overflow:hidden;
-
     font-family:'Poppins',sans-serif;
-
     color:white;
-
 }
 
 /* ===========================================
@@ -26,9 +20,7 @@ body{
 =========================================== */
 
 body{
-
     position:relative;
-
     background:
     radial-gradient(circle at top,#47226d 0%,#170024 35%,#06060d 70%,#000 100%);
 
@@ -37,55 +29,32 @@ body{
 /* ===========================================
    GALAXY GLOW
 =========================================== */
-
 .galaxy{
-
     position:absolute;
-
     inset:0;
-
     background:
-
     radial-gradient(circle,#8e44ff22 0%,transparent 55%),
-
     radial-gradient(circle at 80% 20%,#c77dff33 0%,transparent 40%),
-
     radial-gradient(circle at 20% 70%,#8b5cf633 0%,transparent 45%);
-
     animation:galaxyMove 15s linear infinite;
-
     z-index:-3;
-
 }
-
 @keyframes galaxyMove{
-
     0%{
-
         transform:scale(1);
-
     }
-
     50%{
-
         transform:scale(1.15);
-
     }
-
     100%{
-
         transform:scale(1);
-
     }
-
 }
-
 /* ===========================================
    STARS
 =========================================== */
 
 .stars{
-
     position:absolute;
 
     inset:0;
@@ -750,67 +719,106 @@ header{
 }
 
 header h1{
-
     font-size:34px;
-
     letter-spacing:4px;
-
 }
-
 header h2{
-
     font-size:18px;
-
 }
-
 .subtitle{
-
     font-size:12px;
-
 }
-
 .word{
-
     font-size:28px;
-
 }
-
 #damn{
-
     left:15%;
-
 }
-
 #right{
-
     right:15%;
-
 }
-
 #arrow{
-
     font-size:40px;
-
 }
-
 .bt21{
-
     flex-wrap:wrap;
-
     justify-content:center;
-
 }
-
 .bt21 img{
-
     width:45px;
 
 }
-
 .player{
-
     width:92%;
+}
+}
+/* ===============================
+   UPDATED HEADER
+================================ */
 
+header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:30px;
+    margin-top:20px;
 }
 
+.titles{
+    text-align:left;
+}
+
+.photo-card{
+    width:130px;
+    height:180px;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 0 20px #c77dff;
+}
+
+.photo-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+/* ===============================
+   REMOVE SCROLLING
+================================ */
+
+html,
+body{
+    height:100%;
+    overflow:hidden;
+}
+
+.lyrics-area{
+    height:35vh;
+}
+
+.word{
+    font-size:38px;
+}
+#arrow{
+    display:none;
+}
+footer{
+    display:none;
+}
+.player{
+    margin-top:-20px;
+}
+header h1{
+    font-size:50px;
+}
+
+header h2{
+    font-size:28px;
+}
+
+.subtitle{
+    font-size:14px;
+}
+
+.player{
+    width:65%;
 }
