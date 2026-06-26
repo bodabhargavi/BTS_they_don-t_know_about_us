@@ -1,824 +1,90 @@
-/* ===========================================
-   GOOGLE FONT
-=========================================== */
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-}
-html,
-body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
     font-family:'Poppins',sans-serif;
-    color:white;
 }
-
-/* ===========================================
-   BACKGROUND
-=========================================== */
-
 body{
-    position:relative;
-    background:
-    radial-gradient(circle at top,#47226d 0%,#170024 35%,#06060d 70%,#000 100%);
-
-}
-
-/* ===========================================
-   GALAXY GLOW
-=========================================== */
-.galaxy{
-    position:absolute;
-    inset:0;
-    background:
-    radial-gradient(circle,#8e44ff22 0%,transparent 55%),
-    radial-gradient(circle at 80% 20%,#c77dff33 0%,transparent 40%),
-    radial-gradient(circle at 20% 70%,#8b5cf633 0%,transparent 45%);
-    animation:galaxyMove 15s linear infinite;
-    z-index:-3;
-}
-@keyframes galaxyMove{
-    0%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.15);
-    }
-    100%{
-        transform:scale(1);
-    }
-}
-/* ===========================================
-   STARS
-=========================================== */
-
-.stars{
-    position:absolute;
-
-    inset:0;
-
-    background-image:
-
-    radial-gradient(white 1px,transparent 1px);
-
-    background-size:60px 60px;
-
-    opacity:.18;
-
-    animation:starsMove 35s linear infinite;
-
-    z-index:-2;
-
-}
-
-@keyframes starsMove{
-
-    from{
-
-        transform:translateY(0);
-
-    }
-
-    to{
-
-        transform:translateY(60px);
-
-    }
-
-}
-
-/* ===========================================
-   PARTICLE CANVAS
-=========================================== */
-
-canvas{
-
-    position:absolute;
-
-    inset:0;
-
-    pointer-events:none;
-
-}
-
-/* ===========================================
-   HEADER
-=========================================== */
-
-header{
-
-    width:100%;
-
-    text-align:center;
-
-    margin-top:35px;
-
-}
-
-header h1{
-
-    font-size:62px;
-
-    font-weight:900;
-
+    background:#6D28D9;
     color:white;
-
-    letter-spacing:10px;
-
-    text-shadow:
-
-    0 0 15px #b76dff,
-
-    0 0 35px #9d4edd,
-
-    0 0 70px #9d4edd;
-
-}
-
-header h2{
-
-    margin-top:10px;
-
-    font-size:34px;
-
-    font-weight:700;
-
-    color:#f2e8ff;
-
-    text-shadow:
-
-    0 0 12px #c77dff;
-
-}
-
-.subtitle{
-
-    margin-top:10px;
-
-    color:#d4c4ff;
-
-    letter-spacing:3px;
-
-    font-size:15px;
-
-}
-
-/* ===========================================
-   LYRICS AREA
-=========================================== */
-
-.lyrics-area{
-
-    width:100%;
-
-    height:58vh;
-
+    height:100vh;
     display:flex;
-
     flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    position:relative;
-
-}
-
-/* ===========================================
-   MIDDLE ROW
-=========================================== */
-
-.middle-row{
-
-    width:70%;
-
-    margin:70px 0;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-}
-/* ===========================================
-   LYRICS
-=========================================== */
-
-.word{
-
-    position:absolute;
-
-    font-size:52px;
-
-    font-weight:900;
-
-    color:#c77dff;
-
-    letter-spacing:5px;
-
-    text-transform:uppercase;
-
-    transition:all .45s ease;
-
-    user-select:none;
-
-    text-shadow:
-
-        0 0 12px #9d4edd,
-
-        0 0 25px #9d4edd,
-
-        0 0 50px #c77dff;
-
-}
-
-/* Individual Positions */
-
-#ooh{
-
-    top:12%;
-    left:50%;
-    transform:translateX(-50%);
-
-}
-
-#damn{
-
-    left:20%;
-    top:50%;
-
-}
-
-#right{
-
-    right:20%;
-    top:50%;
-
-}
-
-#yeah{
-
-    bottom:8%;
-    left:50%;
-    transform:translateX(-50%);
-
-}
-
-/* Active Word */
-
-.active{
-
-    color:white;
-
-    transform:scale(1.25);
-
-    text-shadow:
-
-        0 0 10px white,
-
-        0 0 25px white,
-
-        0 0 60px #c77dff,
-
-        0 0 90px #9d4edd;
-
-    animation:pulse .7s infinite alternate;
-
-}
-
-/* Pulse Animation */
-
-@keyframes pulse{
-
-    from{
-
-        filter:brightness(100%);
-
-    }
-
-    to{
-
-        filter:brightness(150%);
-
-    }
-
-}
-
-/* ===========================================
-   ARROW
-=========================================== */
-
-#arrow{
-
-    position:absolute;
-
-    font-size:65px;
-
-    color:white;
-
-    text-shadow:
-
-        0 0 10px white,
-
-        0 0 25px #c77dff,
-
-        0 0 45px #9d4edd;
-
-    transition:
-
-        left .45s ease,
-
-        top .45s ease,
-
-        transform .45s ease;
-
-    pointer-events:none;
-
-    animation:arrowGlow 1.2s infinite alternate;
-
-}
-
-@keyframes arrowGlow{
-
-    from{
-
-        filter:brightness(100%);
-
-    }
-
-    to{
-
-        filter:brightness(180%);
-
-    }
-
-}
-
-/* ===========================================
-   PLAYER
-=========================================== */
-
-.player{
-
-    width:60%;
-
-    margin:auto;
-
-    margin-top:20px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-}
-
-.player-title{
-
-    color:#d9c9ff;
-
-    letter-spacing:4px;
-
-    margin-bottom:18px;
-
-    font-weight:600;
-
-}
-
-.progress-container{
-
-    width:100%;
-
-    height:10px;
-
-    background:#ffffff18;
-
-    border-radius:50px;
-
+    justify-content:space-evenly;
     overflow:hidden;
-
-    box-shadow:
-
-        0 0 12px #7b2cbf;
-
 }
-
-#progress{
-
-    width:0%;
-
-    height:100%;
-
-    background:linear-gradient(
-
-        90deg,
-
-        #ffffff,
-
-        #d8b4fe,
-
-        #c77dff,
-
-        #9d4edd
-
-    );
-
-    border-radius:50px;
-
-    box-shadow:
-
-        0 0 20px #c77dff;
-
-}
-
-/* ===========================================
-   PLAYER GLOW
-=========================================== */
-
-.player{
-
-    animation:playerFloat 4s ease-in-out infinite;
-
-}
-
-@keyframes playerFloat{
-
-    0%{
-
-        transform:translateY(0);
-
-    }
-
-    50%{
-
-        transform:translateY(-6px);
-
-    }
-
-    100%{
-
-        transform:translateY(0);
-
-    }
-
-}
-/* ===========================================
-   BT21 SECTION
-=========================================== */
-
-footer{
-
-    position:absolute;
-
-    bottom:25px;
-
-    width:100%;
-
+/* Header */
+header{
     display:flex;
-
     justify-content:center;
-
-}
-
-.bt21{
-
-    display:flex;
-
-    gap:20px;
-
     align-items:center;
-
+    gap:25px;
+    padding:20px;
 }
-
-.bt21 img{
-
-    width:72px;
-
-    cursor:pointer;
-
-    transition:.35s;
-
-    animation:float 3s ease-in-out infinite;
-
-    filter:drop-shadow(0 0 8px #c77dff);
-
-}
-
-.bt21 img:nth-child(2){ animation-delay:.3s; }
-.bt21 img:nth-child(3){ animation-delay:.6s; }
-.bt21 img:nth-child(4){ animation-delay:.9s; }
-.bt21 img:nth-child(5){ animation-delay:1.2s; }
-.bt21 img:nth-child(6){ animation-delay:1.5s; }
-.bt21 img:nth-child(7){ animation-delay:1.8s; }
-
-.bt21 img:hover{
-
-    transform:
-        translateY(-15px)
-        scale(1.15);
-
-    filter:
-
-        drop-shadow(0 0 15px white)
-
-        drop-shadow(0 0 30px #c77dff);
-
-}
-
-/* ===========================================
-   FLOATING
-=========================================== */
-
-@keyframes float{
-
-    0%{
-
-        transform:translateY(0px);
-
-    }
-
-    50%{
-
-        transform:translateY(-10px);
-
-    }
-
-    100%{
-
-        transform:translateY(0px);
-
-    }
-
-}
-
-/* ===========================================
-   SHOOTING STAR
-=========================================== */
-
-body::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:-100px;
-
-    left:-200px;
-
-    width:350px;
-
-    height:3px;
-
-    background:
-
-    linear-gradient(
-        90deg,
-        white,
-        transparent
-    );
-
-    transform:rotate(35deg);
-
-    animation:shootingStar 7s linear infinite;
-
-    opacity:.8;
-
-}
-
-@keyframes shootingStar{
-
-    0%{
-
-        transform:
-        translate(-100px,-100px)
-        rotate(35deg);
-
-    }
-
-    100%{
-
-        transform:
-        translate(1800px,900px)
-        rotate(35deg);
-
-    }
-
-}
-
-/* ===========================================
-   HEADER GLOW
-=========================================== */
-
-header{
-
-    animation:titleGlow 4s ease-in-out infinite;
-
-}
-
-@keyframes titleGlow{
-
-    0%{
-
-        filter:brightness(100%);
-
-    }
-
-    50%{
-
-        filter:brightness(130%);
-
-    }
-
-    100%{
-
-        filter:brightness(100%);
-
-    }
-
-}
-
-/* ===========================================
-   SCROLLBAR
-=========================================== */
-
-::-webkit-scrollbar{
-
-    width:8px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#9d4edd;
-
-    border-radius:20px;
-
-}
-
-/* ===========================================
-   RESPONSIVE
-=========================================== */
-
-@media(max-width:900px){
-
-header h1{
-
-    font-size:48px;
-
-}
-
-header h2{
-
-    font-size:24px;
-
-}
-
-.word{
-
-    font-size:38px;
-
-}
-
-.bt21{
-
-    gap:10px;
-
-}
-
-.bt21 img{
-
-    width:52px;
-
-}
-
-.player{
-
-    width:85%;
-
-}
-
-.middle-row{
-
-    width:90%;
-
-}
-
-}
-
-@media(max-width:600px){
-
-header{
-
-    margin-top:20px;
-
-}
-
-header h1{
-    font-size:34px;
-    letter-spacing:4px;
-}
-header h2{
-    font-size:18px;
-}
-.subtitle{
-    font-size:12px;
-}
-.word{
-    font-size:28px;
-}
-#damn{
-    left:15%;
-}
-#right{
-    right:15%;
-}
-#arrow{
-    font-size:40px;
-}
-.bt21{
-    flex-wrap:wrap;
-    justify-content:center;
-}
-.bt21 img{
-    width:45px;
-
-}
-.player{
-    width:92%;
-}
-}
-/* ===============================
-   UPDATED HEADER
-================================ */
-
-header{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:30px;
-    margin-top:20px;
-}
-
-.titles{
-    text-align:left;
-}
-
-.photo-card{
-    width:130px;
-    height:180px;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 0 20px #c77dff;
-}
-
 .photo-card img{
-    width:100%;
-    height:100%;
+    width:120px;
+    height:170px;
     object-fit:cover;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(255,255,255,.25);
 }
-/* ===============================
-   REMOVE SCROLLING
-================================ */
-
-html,
-body{
-    height:100%;
-    overflow:hidden;
+.info h1{
+    font-size:42px;
 }
-
-.lyrics-area{
-    height:35vh;
+.info h2{
+    font-size:22px;
+    font-weight:500;
 }
-
+.info p{
+    margin-top:8px;
+    font-size:14px;
+    opacity:.8;
+}
+/* Lyrics */
+.lyrics{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+.middle{
+    display:flex;
+    gap:220px;
+    margin:55px 0;
+}
 .word{
     font-size:38px;
+    font-weight:bold;
+    color:#E9D5FF;
+    transition:.3s;
 }
-#arrow{
-    display:none;
+.active{
+    color:white;
+    transform:scale(1.1);
+    text-shadow:0 0 12px white;
 }
-footer{
-    display:none;
-}
-.player{
-    margin-top:-20px;
-}
-header h1{
-    font-size:50px;
-}
+/* Responsive */
 
-header h2{
-    font-size:28px;
-}
-
-.subtitle{
-    font-size:14px;
-}
-
-.player{
-    width:65%;
+@media(max-width:768px){
+    header{
+        flex-direction:column;
+        text-align:center;
+    }
+    .middle{
+        gap:90px;
+    }
+    .photo-card img{
+        width:95px;
+        height:135px;
+    }
+    .word{
+        font-size:28px;
+    }
+    .info h1{
+        font-size:32px;
+    }
+    .info h2{
+        font-size:18px;
+    }
 }
